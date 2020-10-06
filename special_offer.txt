@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Et forslag</title>
+</head>
+
+<body>
+
+  <div>
+    <header>
+      <h1>FindYourLove</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="alle-profiler.html">Alle profiler</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section>
+        <div>
+          <label>What do you do in your freetime?</label>
+          <input type="text" id="hobbies" name="hobbies" />
+        </div>
+        <div>
+          <input type="button" value="Surprise!" onclick="showSpecialOffer()" />
+        </div>
+      </section>
+
+      <section>
+        <div id="matchedItem"></div>
+      </section>
+    </main>
+
+  </div>
+
+  <script>
+    var names = ['Ben', 'Mark', 'Ted', 'Marie', 'Sara', 'Nina']
+    var ages = [25, 26, 32, 28, 27, 25]
+    var genders = ["mann", "mann", "mann", "kvinne", "kvinne", "kvinne"]
+    var images = [
+      "images/man1.jpg",
+      "images/man2.jpg",
+      "images/man3.jpg",
+      "images/woman1.jpg",
+      "images/woman2.jpg",
+      "images/woman3.jpg"
+    ]
+    var favorites = [
+      ['Reading Book', 'Sports'],
+      ['Watching Movies', 'Hiking'],
+      ['Sports', 'Cooking'],
+      ['Reading Book', 'Sports'],
+      ['Watching Movies', 'Hiking'],
+      ['Sports', 'Cooking'],
+    ]
+
+    function showSpecialOffer() {
+      var hobbies = document.getElementById('hobbies').value
+
+      var matches = []
+
+      for (var i = 0; i < favorites.length; i++) {
+        for (var j = 0; j < favorites[i].length; j++) {
+          if (favorites[i][j] === hobbies) {
+            matches.push(i)
+          }
+        }
+      }
+
+      if (matches.length > 0) {
+        var matchedIndex = matches[Math.floor(Math.random() * matches.length)]
+        var profile = `
+					<table>
+            <tbody>
+              <tr>
+                <td>
+                  <img src="${images[matchedIndex]}" alt="">
+                </td>
+                <td>
+                   <p>${names[matchedIndex]}</p>
+                   <p>${ages[matchedIndex]}</p>
+                   <p>${genders[matchedIndex]}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>`;
+        document.getElementById("matchedItem").innerHTML = profile;
+      } else {
+        alert('Ingen match');
+      }
+    }
+  </script>
+
+</body>
+
+</html>
